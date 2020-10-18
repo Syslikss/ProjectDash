@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -35,6 +36,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (playerIsDead)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
         casterTraps.RemoveAll(v => !v);
         defaultEnemies.RemoveAll(v => !v);
         foreach (var trap in casterTraps)
@@ -51,5 +56,9 @@ public class GameManager : MonoBehaviour
                 spawner.SpawnRandomEnemy();
             }
         }
+    }
+    public void KillPlayer()
+    {
+        playerIsDead = true;
     }
 }

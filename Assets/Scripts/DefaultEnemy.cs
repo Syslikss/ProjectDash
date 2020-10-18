@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class DefaultEnemy : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class DefaultEnemy : MonoBehaviour
             }
             else
             {
-                Debug.Log("PlayerDead");
+                GameManager.Instantiate.KillPlayer();
             }
         }
     }

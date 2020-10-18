@@ -9,7 +9,8 @@ public class SimpleTrap : MonoBehaviour
             if (GameManager.Instantiate.Player.direction == Vector2.zero)
             {
                 Debug.Log("PlayerInASimpleTRAP");
-                GameManager.Instantiate.playerIsDead = true;
+                GameManager.Instantiate.KillPlayer();
+
             }
         }
     }

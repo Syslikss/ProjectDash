@@ -9,7 +9,8 @@ public class CasterTrap : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("PlayerInACasterTRAP");
-            GameManager.Instantiate.playerIsDead = true;
+
+            GameManager.Instantiate.KillPlayer();
         }
     }
 
