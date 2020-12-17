@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
     private Animator animations;
 
     public float dashRange = 100f; //From 50 to >100
-    private readonly float dashCD = .5f;
+    private readonly float dashCD = .1f;
     private float dashCDDump = 0f;
 
     private readonly float dashTime = 0.3f;
