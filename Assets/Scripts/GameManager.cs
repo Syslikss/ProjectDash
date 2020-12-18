@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,12 +15,18 @@ public class GameManager : MonoBehaviour
     public Spawner spawnerPrefab;
     private int NumberOfEnemies = 10;
     private int CurrentNumberOfEnemies;
+    private bool IsPaused = false;
+    [SerializeField]
+    private GameObject pauseCanvas;
+    public int killCount;
+    public Text textKillCount;
 
     public static new GameManager Instantiate { get; private set; }
 
     public void Awake()
     {
         Instantiate = this;
+        pauseCanvas.SetActive(false);
     }
 
     private void Start()
@@ -44,6 +52,7 @@ public class GameManager : MonoBehaviour
         {
             trap.DecreaseLifeTime();
         }
+        textKillCount.text = $"Kill Count: {killCount}";
 
         CurrentNumberOfEnemies = casterEnemies.Count + defaultEnemies.Count;
 
@@ -59,5 +68,38 @@ public class GameManager : MonoBehaviour
     public void KillPlayer()
     {
         playerIsDead = true;
+    }
+
+    public void PauseButtonPressed()
+    {
+        if (IsPaused)
+        {
+            pauseCanvas.SetActive(false);
+            Time.timeScale = 1f;
+            IsPaused = false;
+        }
+        else
+        {
+            pauseCanvas.SetActive(true);
+            Time.timeScale = 0f;
+            IsPaused = true;
+        }
+    }
+
+
+    public void AsyncLoadingMenu()
+    {
+        PauseButtonPressed();
+        StartCoroutine(LoadMenu());
+    }
+
+    IEnumerator LoadMenu()
+    {
+        var load = SceneManager.LoadSceneAsync("Menu");
+
+        while (!load.isDone)
+        {
+            yield return null;
+        }
     }
 }

@@ -26,6 +26,7 @@ public class DefaultEnemy : MonoBehaviour
             {
                 Destroy(gameObject);
                 Debug.Log("EnemyDead");
+                GameManager.Instantiate.killCount++;
             }
             else
             {

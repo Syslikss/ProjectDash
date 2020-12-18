@@ -13,10 +13,10 @@ public class CasterEnemy : MonoBehaviour
     private Animator animations;
 
 
-    public float castTime = .5f;
+    public float castTime = .1f;
     private float castTimeDump = 0f;
 
-    public float castCD = 5f;
+    public float castCD = 1f;
     private float castCDDump = 0f;
 
     private void Start()
@@ -70,9 +70,10 @@ public class CasterEnemy : MonoBehaviour
         }
 
         if (castTimeDump > 0)
-        {
-            castTimeDump -= Time.deltaTime * 2;
-        }
+            castTimeDump -= Time.deltaTime;
+
+        if (castCDDump > 0)
+            castCDDump -= Time.deltaTime;
 
     }
 
