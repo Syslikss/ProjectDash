@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
 
     public static new GameManager Instantiate { get; private set; }
 
-    // Start is called before the first frame update
     public void Awake()
     {
         Instantiate = this;
@@ -33,7 +32,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (playerIsDead)
@@ -57,6 +55,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
     public void KillPlayer()
     {
         playerIsDead = true;

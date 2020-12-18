@@ -7,6 +7,9 @@ public class CameraController : MonoBehaviour
     public float smoothTime;
     private Vector3 velocity = Vector3.zero;
     private Vector3 d;
+    [SerializeField]
+    private float cameraDistancePersent = 1f;
+
 
     private void Start()
     {
@@ -16,6 +19,8 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.SmoothDamp(transform.position, player.transform.position + d, ref velocity, smoothTime);
+        transform.position = Vector3.SmoothDamp(transform.position, 
+                                                player.transform.position + d * cameraDistancePersent, 
+                                                ref velocity, smoothTime);
     }
 }

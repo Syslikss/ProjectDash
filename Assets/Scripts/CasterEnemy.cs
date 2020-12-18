@@ -10,6 +10,8 @@ public class CasterEnemy : MonoBehaviour
     public float runRange = 30f;
     public float trapScatter = 20f;
     public CasterTrap casterTrap;
+    private Animator animations;
+
 
     public float castTime = .5f;
     private float castTimeDump = 0f;
@@ -20,6 +22,7 @@ public class CasterEnemy : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
+        animations = gameObject.GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -28,6 +31,7 @@ public class CasterEnemy : MonoBehaviour
         Vector3 distance = player.transform.position - gameObject.transform.position;
         if (castTimeDump <= 0 || castCDDump > 0)
         {
+
             if (distance.magnitude > castRange)
             {
                 agent.destination = player.transform.position;
@@ -49,6 +53,8 @@ public class CasterEnemy : MonoBehaviour
         if (castTime == castTimeDump && castCDDump <= 0)
         {
             Debug.Log("Atc");
+            if (!animations.GetCurrentAnimatorStateInfo(0).IsName("combat_idle"))
+                animations.Play("combat_idle");
             for (int i = -1; i <= 1; i++)
                 for (int j = -1; j <= 1; j++)
                 {
@@ -65,12 +71,9 @@ public class CasterEnemy : MonoBehaviour
 
         if (castTimeDump > 0)
         {
-            castTimeDump -= Time.deltaTime;
+            castTimeDump -= Time.deltaTime * 2;
         }
-        if (castCDDump > 0)
-        {
-            castCDDump -= Time.deltaTime;
-        }
+
     }
 
     private void OnTriggerEnter(Collider other)

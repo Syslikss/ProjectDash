@@ -29,43 +29,28 @@ public class Player : MonoBehaviour
             direction = GetSwipe();
             dashTimeDump = dashTime;
             if (!animations.GetCurrentAnimatorStateInfo(0).IsName("attack_B"))
-            {
                 animations.Play("idle");
-            }
         }
         else
         {
             if (!animations.GetCurrentAnimatorStateInfo(0).IsName("attack_B"))
-            {
                 animations.Play("attack_B");
-            }
         }
 
         if (dashTimeDump > 0.1)
-        {
             dashTimeDump -= Time.deltaTime;
-        }
         else
-        {
             direction = new Vector2(0, 0);
-        }
+
         if (dashCDDump > 0)
-        {
             dashCDDump -= Time.deltaTime;
-        }
 
         Vector3 move = new Vector3(direction.x, 0, direction.y);
         controller.Move(move * Time.deltaTime * (dashRange / dashTime));
 
         if (move != Vector3.zero)
-        {
             gameObject.transform.forward = move;
-        }
     }
-
-    
-
-    
 
     public Vector2 GetSwipe()
     {
@@ -74,9 +59,8 @@ public class Player : MonoBehaviour
         {
             Touch t = Input.GetTouch(0);
             if (t.phase == TouchPhase.Began)
-            {
                 firstPressPos = new Vector2(t.position.x, t.position.y);
-            }
+
             if (t.phase == TouchPhase.Ended)
             {
                 secondPressPos = new Vector2(t.position.x, t.position.y);
